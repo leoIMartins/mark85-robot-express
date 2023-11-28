@@ -25,7 +25,7 @@ Não deve permitir o cadastro com email duplicado
 
     ${user}            Create Dictionary
     ...     name=Martins Leonardo
-    ...     email=martinso@hotmail.com
+    ...     email=martins@hotmail.com
     ...     password=pwd123
 
     ${name}        Set Variable         Martins Leonardo

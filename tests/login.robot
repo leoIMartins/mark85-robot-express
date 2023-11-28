@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation
 
+Library         Collections                    # utilizada para fazer alterações em supervariáveis
 Resource        ../resources/base.resource
 
 Test Setup        Start Session
@@ -14,6 +15,23 @@ Deve poder logar com um usuário pré-cadastrado
     ...    email=leonardo@hotmail.com
     ...    password=pwd123
 
-    Submit login form    ${user}
+    Remove user from database    ${user}[email]
+    Insert user from database    ${user}
 
-    Sleep    5
+    Submit login form            ${user}
+    User should be logged in     ${user}[name]
+
+Não deve logar com senha inválida
+
+    ${user}    Create Dictionary
+    ...    name=Steve Woz
+    ...    email=woz@apple.com
+    ...    password=123456
+
+    Remove user from database    ${user}[email]
+    Insert user from database    ${user}
+
+    Set To Dictionary    ${user}        password=abc123
+
+    Submit login form        ${user}
+    Notice should be         Ocorreu um erro ao fazer login, verifique suas credenciais.

@@ -6,7 +6,6 @@ Library        Browser
 *** Keywords ***
 Submit login form
     [Arguments]        ${user}
-
     Fill Text    css=input[placeholder$=mail]    ${user}[email]        # procura um placeholder que termina com mail
     Fill Text    css=input[placeholder=Senha]    ${user}[password]
 
