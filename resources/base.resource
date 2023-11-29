@@ -12,6 +12,7 @@ Resource       pages/components/Alert.resource
 
 Resource       pages/SignupPage.resource
 Resource       pages/LoginPage.resource
+Resource       pages/TaskCreatePage.resource
 
 *** Keywords ***
 Start Session

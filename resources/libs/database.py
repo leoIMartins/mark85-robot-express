@@ -6,6 +6,17 @@ client = MongoClient('mongodb+srv://qa:xperience@cluster0.bu5fnsm.mongodb.net/?r
 
 db = client['markdb']
 
+@keyword('Clean user from database')
+def clean_user(user_email):
+    users = db['users']
+    tasks = db['tasks']
+
+    u = users.find_one({'email': user_email})
+
+    if (u):                                             # verifica se o usuário existe no banco
+        tasks.delete_many({'user': u['_id']})           # deleta todas as tarefas do usuário pelo id
+        users.delete_many({'email': user_email})        # remove o usuário
+
 @keyword('Remove user from database')
 def remove_user(email):
     users = db['users']
